@@ -51,6 +51,7 @@ const LOADER_TIMEOUT = 500;
 
 /**
  * @typedef {object} EditorAPI
+ * @typedef {object} BlockAPI
  * @property {object} styles - Styles API {@link https://github.com/codex-team/editor.js/blob/next/types/api/styles.d.ts}
  * @property {object} i18n - Internationalization API {@link https://github.com/codex-team/editor.js/blob/next/types/api/i18n.d.ts}
  * @property {object} notifier - Notifier API {@link https://github.com/codex-team/editor.js/blob/next/types/api/notifier.d.ts}
@@ -60,6 +61,10 @@ const LOADER_TIMEOUT = 500;
  * @class AttachesTool
  * @classdesc AttachesTool for Editor.js 2.0
  */
+
+/**
+ *
+ */
 export default class AttachesTool {
   /**
    * @param {object} options - tool constructor options
@@ -67,11 +72,13 @@ export default class AttachesTool {
    * @param {AttachesToolConfig} options.config - user defined config
    * @param {EditorAPI} options.api - Editor.js API
    * @param {boolean} options.readOnly - flag indicates whether the Read-Only mode enabled or not
-   * @param {BlockAPI} options.BlockAPI - BlockAPI API
+   * @param {BlockAPI} options.block - BlockAPI API
    */
   constructor({ data, config, api, readOnly, block }) {
     this.api = api;
+
     this.block = block;
+
     this.readOnly = readOnly;
 
     this.nodes = {

@@ -17,6 +17,11 @@ const crypto = require('crypto');
  * Sample server for files upload
  */
 class ServerExample {
+  /**
+   * @param root0
+   * @param root0.port
+   * @param root0.fieldName
+   */
   constructor({ port, fieldName }) {
     this.uploadDir = __dirname + '/\.tmp';
     this.fieldName = fieldName;
@@ -35,6 +40,7 @@ class ServerExample {
 
   /**
    * Request handler
+   *
    * @param {http.IncomingMessage} request
    * @param {http.ServerResponse} response
    */
@@ -45,6 +51,7 @@ class ServerExample {
 
     if (method.toLowerCase() !== 'post') {
       response.end();
+
       return;
     }
 
@@ -59,6 +66,7 @@ class ServerExample {
 
   /**
    * Allows CORS requests for debugging
+   *
    * @param response
    */
   allowCors(response) {
@@ -70,17 +78,18 @@ class ServerExample {
 
   /**
    * Handles uploading by file
+   *
    * @param request
    * @param response
    */
   uploadFile(request, response) {
-    let responseJson = {
-      success: 0
+    const responseJson = {
+      success: 0,
     };
 
     this.getForm(request)
       .then(({ files }) => {
-        let file = files[this.fieldName] || {};
+        const file = files[this.fieldName] || {};
 
         responseJson.success = 1;
         responseJson.file = {
@@ -100,8 +109,9 @@ class ServerExample {
 
   /**
    * Accepts post form data
+   *
    * @param request
-   * @return {Promise<{files: object, fields: object}>}
+   * @returns {Promise<{files: object, fields: object}>}
    */
   getForm(request) {
     return new Promise((resolve, reject) => {
@@ -116,7 +126,10 @@ class ServerExample {
         } else {
           console.log('fields', fields);
           console.log('files', files);
-          resolve({ files, fields });
+          resolve({
+            files,
+            fields,
+          });
         }
       });
     });
@@ -124,16 +137,17 @@ class ServerExample {
 
   /**
    * Generates md5 hash for string
+   *
    * @param string
-   * @return {string}
+   * @returns {string}
    */
   md5(string) {
-    return crypto.createHash('md5').update(string).digest('hex');
+    return crypto.createHash('md5').update(string)
+      .digest('hex');
   }
 }
 
-
 new ServerExample({
   port: 8008,
-  fieldName: 'file'
+  fieldName: 'file',
 });
