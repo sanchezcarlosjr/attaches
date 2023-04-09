@@ -67,9 +67,11 @@ export default class AttachesTool {
    * @param {AttachesToolConfig} options.config - user defined config
    * @param {EditorAPI} options.api - Editor.js API
    * @param {boolean} options.readOnly - flag indicates whether the Read-Only mode enabled or not
+   * @param {BlockAPI} options.BlockAPI - BlockAPI API
    */
-  constructor({ data, config, api, readOnly }) {
+  constructor({ data, config, api, readOnly, block }) {
     this.api = api;
+    this.block = block;
     this.readOnly = readOnly;
 
     this.nodes = {
@@ -385,7 +387,7 @@ export default class AttachesTool {
     /**
      * Trigger onChange function when upload finished
      */
-    this.api.blocks.getBlockByIndex(this.api.blocks.getCurrentBlockIndex()).dispatchChange();
+    this.block.dispatchChange();
   }
 
   /**
