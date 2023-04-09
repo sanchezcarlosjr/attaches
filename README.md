@@ -9,6 +9,10 @@ This tool allows you to attach files to your articles.
 ## Installation
 
 You can get the package using any of these ways.
+### Via GitHub
+```
+yarn add github:sanchezcarlosjr/attaches.git
+```
 
 ### Via NPM / Yarn
 
